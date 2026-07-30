@@ -18,20 +18,20 @@
 
 ## Table of Contents
 
-- [What is it?](#what-is-it)
-- [Key Features](#key-features)
-- [System Overview](#system-overview)
-- [Core Hardware](#core-hardware)
-  - [FPGA](#fpga)
-  - [Memory](#memory)
-  - [USB and Debug](#usb-and-debug)
-  - [Expansion](#expansion)
-  - [Power System](#power-system)
-- [Ecosystem Positioning](#ecosystem-positioning)
-- [Design Decisions](#design-decisions)
-- [Status & Roadmap](#status--roadmap)
-- [Known Limitations & Open Questions](#known-limitations--open-questions)
-- [License](#license)
+1. [What is it?](#what-is-it)
+2. [Key Features](#key-features)
+3. [System Overview](#system-overview)
+4. [Core Hardware](#core-hardware)
+   1. [FPGA](#fpga)
+   2. [Memory](#memory)
+   3. [USB and Debug](#usb-and-debug)
+   4. [Expansion](#expansion)
+   5. [Power System](#power-system)
+5. [Ecosystem Positioning](#ecosystem-positioning)
+6. [Design Decisions](#design-decisions)
+7. [Status & Roadmap](#status--roadmap)
+8. [Known Limitations & Open Questions](#known-limitations--open-questions)
+9. [License](#license)
 
 ---
 
@@ -41,14 +41,7 @@ Lyrion FPGA-25 is a **compact, general-purpose FPGA development board** built ar
 
 It is **not** the final radar board, and it is **not** a heavy-compute platform. It is the deterministic hardware-acceleration layer that sits between simple MCU nodes and the later Artix and RK3566-class boards.
 
-Target work:
-
-- FPGA bring-up and timing closure
-- FFT and DSP pipeline experiments
-- SDR baseband work
-- High-speed digital interface bring-up (LVDS ADC/DAC, parallel buses)
-- ADC/DAC module testing
-- Future Lyrion accelerator boards
+Target work covers FPGA bring-up and timing closure, FFT and DSP pipeline experiments, SDR baseband work, high-speed digital interface bring-up (LVDS ADC/DAC and parallel buses), ADC and DAC module testing, and future Lyrion accelerator boards.
 
 ---
 
