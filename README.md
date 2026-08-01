@@ -49,7 +49,7 @@ Target work covers FPGA bring-up and timing closure, FFT and DSP pipeline experi
 
 | Feature | Specification |
 |---------|---------------|
-| **FPGA** | AMD/Xilinx Spartan-7 XC7S25 |
+| **FPGA** | AMD/Xilinx Spartan-7 XC7S25 (`XC7S25-2CSGA225C`, fallback `XC7S25-1CSGA225C`) |
 | **Logic** | ~14,700 LUTs and ~29,400 flip-flops (about 23,300 logic cells) |
 | **DSP** | 90 DSP48E1 slices |
 | **Block RAM** | ~90 Kb internal |
@@ -61,7 +61,7 @@ Target work covers FPGA bring-up and timing closure, FFT and DSP pipeline experi
 | **Input** | USB-C (5 V) |
 | **Target cost** | roughly €75 to €90 per board (small JLCPCB assembly run) |
 
-> The **resource figures** (LUTs, FF, DSP, BRAM) are the commonly published XC7S25 values. **UNVERIFIED**: confirm the exact numbers and the chosen package and speed grade against the Spartan-7 datasheet (DS890) before finalising the design.
+> The **resource figures** (LUTs, FF, DSP, BRAM) are the commonly published XC7S25 values. **UNVERIFIED**: confirm the exact numbers against the Spartan-7 datasheet (DS890) before finalising the design.
 
 ---
 
@@ -118,7 +118,7 @@ flowchart TB
 
 ### FPGA
 
-The **AMD/Xilinx Spartan-7 XC7S25** is the main programmable logic device. It serves as the DSP and interface engine, an optional soft-CPU host, and the high-speed data handler.
+The **AMD/Xilinx Spartan-7 XC7S25**, ordered as `XC7S25-2CSGA225C`, is the main programmable logic device. It serves as the DSP and interface engine, an optional soft-CPU host, and the high-speed data handler.
 
 | Parameter | Value |
 |-----------|-------|
@@ -134,7 +134,7 @@ The **AMD/Xilinx Spartan-7 XC7S25** is the main programmable logic device. It se
 
 > **Critical architectural fact:** Spartan-7 has **no hard high-speed serial transceivers**. There is no native PCIe, USB3, GigE, SFP, or JESD204. Those need an external PHY over SelectIO, or a larger Artix or Kintex. High-speed work on this board means **parallel LVDS**, not multi-gigabit serial. This is by design and matches the scope of the board.
 
-> **Package and speed grade are an open decision.** Candidate packages include the CSGA225 (225-ball, 0.8 mm pitch, most compact), the CSG325 (325-ball, 0.8 mm), and the FGG484 (484-ball, 1.0 mm, easiest to route and hand-assemble). **UNVERIFIED**: confirm the I/O counts per package and pick based on the assembly capability you actually have. A 0.8 mm BGA is not a friendly hand-solder target.
+> **Ordering code (decided):** primary part **`XC7S25-2CSGA225C`** — Spartan-7 XC7S25, speed grade -2, commercial temperature (0 to +85 °C junction), CSGA225 225-ball package (13×13 mm, 0.8 mm pitch). **Out-of-stock fallback:** **`XC7S25-1CSGA225C`** — identical package, footprint, and configuration, with the lower -1 speed grade. The fallback only counts as an identical replacement once timing closure is demonstrated at the -1 grade; high-speed LVDS interfaces (OSERDES/ISERDES) are the first place the speed-grade difference shows up. **UNVERIFIED**: confirm the exact user-I/O count for the CSGA225 package against DS890. A 0.8 mm BGA is not a friendly hand-solder target.
 
 ### Memory
 
@@ -256,7 +256,7 @@ Breaking out LVDS data and clock pairs plus control and power makes the board a 
 |-------|--------|
 | Architecture definition | ✅ Done |
 | Core component selection | ✅ Done |
-| Package and speed-grade selection | ⬜ Pending |
+| Package and speed-grade selection | ✅ Done (XC7S25-2CSGA225C; fallback XC7S25-1CSGA225C) |
 | Power tree and sequencing design | ⬜ Pending |
 | Schematic capture | ⬜ Pending |
 | PCB layout (controlled-Z LVDS, BGA fanout) | ⬜ Pending |
@@ -276,7 +276,7 @@ Breaking out LVDS data and clock pairs plus control and power makes the board a 
 |-------|--------|
 | **No high-speed serial transceivers** | Spartan-7 has no GTP/GTH and no native PCIe/USB3/GigE/SFP/JESD204, so it is parallel LVDS only. By design. |
 | **XC7S25 resource figures** | LUT, FF, DSP, and BRAM values are commonly published numbers, so **confirm against DS890** before finalising. |
-| **Package and speed grade not chosen** | A 0.8 mm BGA (CSGA225/325) is compact but hard to hand-assemble, while the FGG484 (1.0 mm) is easier. Decide from real assembly capability. |
+| **Speed-grade fallback verification** | Primary XC7S25-2CSGA225C; fallback XC7S25-1CSGA225C is pin- and bitstream-compatible, but timing closure must be verified at the -1 grade before it is treated as identical. A 0.8 mm BGA (CSGA225) is compact but hard to hand-assemble. |
 | **HyperRAM is not random-access SRAM** | Burst-oriented with initial latency; implement the HyperBus controller in fabric; sustained throughput is realistically about 200 to 300 MB/s. |
 | **W958D8 max clock** | 200 MHz class assumed, so **confirm the grade from the Winbond datasheet.** |
 | **S25FL256L supply and ordering code** | 3.0 V family assumed; the exact ordering code and config-bank voltage **must be confirmed.** |

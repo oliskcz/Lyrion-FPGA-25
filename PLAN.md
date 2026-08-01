@@ -10,13 +10,13 @@ Lock the architecture and convert every **UNVERIFIED** item (see SPECS.md §6) i
 
 - [x] Top-level architecture (FPGA, flash, HyperRAM, FT2232H, LVDS header)
 - [x] Core part selection (XC7S25, S25FL256L, W958D8, FT2232H, RT7273)
-- [ ] Confirm XC7S25 resource counts and I/O per candidate package (DS890)
-- [ ] **Choose package and speed grade** (CSGA225, CSG325, or FGG484) from real assembly capability
+- [ ] Confirm XC7S25 resource counts and I/O for the CSGA225 package (DS890)
+- [x] **Choose package and speed grade**: CSGA225, primary `XC7S25-2CSGA225C`, out-of-stock fallback `XC7S25-1CSGA225C`
 - [ ] Confirm S25FL256L ordering code and supply voltage
 - [ ] Confirm W958D8 max clock for the chosen grade
 - [ ] Confirm RT7273 specs (current, input range, frequency, package)
 
-**Exit:** every part has a confirmed datasheet line, and the package and speed grade are chosen.
+**Exit:** every part has a confirmed datasheet line, and the package and speed grade are chosen (CSGA225, -2 primary, -1 fallback).
 
 ---
 
@@ -107,7 +107,7 @@ Bring up each memory and interface and measure it.
 
 - [ ] Build a passive LVDS loopback fixture on the header
 - [ ] Transmit PRBS over the LVDS pairs, receive, and check for bit errors
-- [ ] Characterise the maximum clean data rate at the chosen speed grade
+- [ ] Characterise the maximum clean data rate at the chosen speed grade (repeat for the -1 fallback part if used)
 
 **Exit:** the LVDS pairs pass PRBS at the target interface rate with an acceptable BER.
 
