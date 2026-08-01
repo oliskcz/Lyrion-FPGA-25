@@ -10,7 +10,7 @@ Lock the architecture and convert every **UNVERIFIED** item (see SPECS.md §6) i
 
 - [x] Top-level architecture (FPGA, flash, HyperRAM, FT2232H, LVDS header)
 - [x] Core part selection (XC7S25, S25FL256L, W958D8, FT2232H, RT7273)
-- [ ] Confirm XC7S25 resource counts and I/O for the CSGA225 package (DS890)
+- [x] Confirm XC7S25 I/O for CSGA225: 150 user I/O (pinout Rev 1.1). Resource counts (LUT/FF/DSP/BRAM) still pending DS890.
 - [x] **Choose package and speed grade**: CSGA225, primary `XC7S25-2CSGA225C`, out-of-stock fallback `XC7S25-1CSGA225C`
 - [ ] Confirm S25FL256L ordering code and supply voltage
 - [ ] Confirm W958D8 max clock for the chosen grade

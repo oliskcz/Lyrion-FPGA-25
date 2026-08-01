@@ -15,7 +15,7 @@ Working specification for the Spartan-7 XC7S25 platform. Numbers marked **UNVERI
 | Block RAM | ~90 Kb | 36 Kb and 18 Kb configurable blocks; **UNVERIFIED** |
 | Distributed RAM | ~ (LUT-based) | derived from LUT count |
 | Clock buffers (BUFG) | device-dependent | **UNVERIFIED** |
-| I/O (max) | package-dependent | CSGA225 < CSG325 < FGG484; **UNVERIFIED** |
+| I/O (user) | 150 | 50 per bank (14, 15, 34); confirmed from pinout Rev 1.1 |
 | High-speed transceivers | **0** | Spartan-7 has no GTP/GTH |
 | Configuration | QSPI x1/x2/x4, Master SPI | native |
 
@@ -161,7 +161,7 @@ Rough target for a small JLCPCB assembly run, with critical parts sourced separa
 
 Confirm before finalising the design:
 
-1. XC7S25 exact resource counts and I/O per package (DS890).
+1. XC7S25 exact resource counts (DS890). User I/O confirmed: 150 (pinout Rev 1.1).
 2. User-I/O count for the chosen CSGA225 package (DS890), and timing closure of the fallback -1 speed grade.
 3. S25FL256L ordering code and supply voltage (3.0 V family assumed).
 4. W958D8 max clock for the specific grade (Winbond datasheet).
